@@ -1,0 +1,14 @@
+<!DOCTYPE html >
+<html xmlns:th="http://thmyelead.org" lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:each="club: ${clubs}">
+        <img th:src="${club.photoUrl}" alt="" srcset="">
+        <h1 th:text="${club.title}"></h1>
+        <p></p>
+    </div>
+</body>
+</html>
