@@ -3,9 +3,11 @@ package com.giangtran.web.controller;
 import com.giangtran.web.dto.ClubDto;
 import com.giangtran.web.models.Club;
 import com.giangtran.web.service.ClubService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +38,12 @@ public class ClubController {
 
     }
     @PostMapping("clubs/store")
-    public String saveClub(@ModelAttribute("club") Club club){
-        clubService.storeClub(club);
+    public String saveClub(@Valid @ModelAttribute("club") ClubDto clubDto, BindingResult result, Model model){
+        if (result.hasErrors()) {
+            model.addAttribute("club", clubDto);
+            return "clubs-create";
+        };
+        clubService.storeClub(clubDto);
         return "redirect:/clubs";
     }
     @GetMapping("clubs/{clubId}/edit")
@@ -49,11 +55,17 @@ public class ClubController {
     }
 
     @PostMapping("clubs/{clubId}/store")
-    public String storeClub(@PathVariable("clubId") Long clubId, @ModelAttribute("club")  ClubDto club) {
+    public String storeClub(@PathVariable("clubId") Long clubId, @Valid @ModelAttribute("club")  ClubDto clubDto, BindingResult result, Model model) {
         System.out.println("checkkkkk");
 
-        System.out.println(club);
-            clubService.updateClub(club);
+        System.out.println(clubDto);
+
+        if(result.hasErrors()) {
+            model.addAttribute("club", clubDto);
+            return "clubs-edit";
+        }
+
+            clubService.updateClub(clubDto);
         return "redirect:/clubs";
     }
 
