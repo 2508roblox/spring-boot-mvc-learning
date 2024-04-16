@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap & Thymeleaf Layout</title>
+    <!-- Link đến Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Giang</title>
+</head>
+<body>
+
+<!-- Phần breadcrumb -->
+<div th:include="breadcrumb :: breadcrumb"></div>
+
+
+<!-- Phần tiêu đề -->
+<div class="container mt-4">
+    <h2 th:text="${pageTitle}">Page Title</h2>
+</div>
+
+<!-- Phần nội dung chính -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <!--day la phan render child -->
+            <div layout:fragment="body">
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Phần sidebar (nếu có) -->
+<!--            <div th:replace="fragments/sidebar :: sidebar"></div>-->
+        </div>
+    </div>
+</div>
+
+<!-- Link đến Thymeleaf và Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

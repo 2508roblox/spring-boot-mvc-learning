@@ -1,14 +1,27 @@
 <!DOCTYPE html >
-<html xmlns:th="http://thmyelead.org" lang="en" >
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}"
+
+
+        lang="en" >
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<main layout:fragment="body">
+
     <div th:each="club: ${clubs}">
+        <a th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">edit</a>
+
         <img th:src="${club.photoUrl}" alt="" srcset="">
         <h1 th:text="${club.title}"></h1>
         <p></p>
     </div>
+
+
+</main>
 </body>
 </html>
